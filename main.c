@@ -42,8 +42,8 @@ char *Pointer = &data_raw[12];
 int main(){
 	//uint8_t *result;
   //Maybe use SHA-1  instead because it's to random we don't get the same thing everytime
-  print_hash(md5Number(md5String("t")));
-  print_hash(md5Number(md5String("t")));
+  print_hash(md5Number(md5String(data_raw)));
+  print_hash(md5Number(md5String(data_raw)));
 
   /*result = md5String(data_raw);
   for(int i=0; i<11;i++){
