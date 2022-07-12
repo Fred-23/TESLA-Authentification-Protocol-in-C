@@ -197,16 +197,18 @@ uint8_t* md5String(char *input){
 	return result;
 }
 
-uint8_t* md5String(char *input){
+
+uint8_t* md5Number(uint8_t *input){
 	MD5Context ctx;
 	md5Init(&ctx);
-	md5Update(&ctx, (uint8_t *)input, strlen(input));
+	md5Update(&ctx, (uint8_t *)input, 32);
 	md5Finalize(&ctx);
 
 	uint8_t *result = malloc(16);
 	memcpy(result, ctx.digest, 16);
 	return result;
 }
+
 
 
 uint8_t* md5File(FILE *file){

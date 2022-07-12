@@ -40,14 +40,20 @@ char data_raw[12]= "Hello World";
 char *Pointer = &data_raw[12];
 
 int main(){
-	uint8_t *result;
-  result = md5String(data_raw);
+	//uint8_t *result;
+  //Maybe use SHA-1  instead because it's to random we don't get the same thing everytime
+  print_hash(md5Number(md5String("t")));
+  print_hash(md5Number(md5String("t")));
+
+  /*result = md5String(data_raw);
   for(int i=0; i<11;i++){
 	 
     printf("index %i   :", i);
 	  print_hash(result);
-    data_raw = result;
+    result = md5Number(result);
     //free(result);
     }
-	
+*/
+
+  
 }
