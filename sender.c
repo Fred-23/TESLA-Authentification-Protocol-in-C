@@ -24,6 +24,13 @@ void print_hash(uint8_t *p){
 	printf("\n");
 }
 
+void print_char_hash(char *p){
+	for(unsigned int i = 0; i < 16; ++i){
+		printf("%02X", p[i]);
+	}
+	printf("\n");
+}
+
 char* concat(const char *s1, const char *s2)
 {
     char *result = malloc(strlen(s1) + strlen(s2) + 1); // +1 for the null-terminator
