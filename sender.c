@@ -40,11 +40,11 @@ char* concat(const char *s1, const char *s2)
     return result;
 }
 
-char* mac(char *pkey, char *message ){
-  char *pmac;
-	//concatenate the key and message then do the hash
-  pmac=concat(pkey,message);
-  pmac=md5Char(pmac);
+uint8_t* mac(uint8_t *pkey, char *message ){
+  uint8_t *pmac;
   
+	//concatenate the key and message then do the hash
+  pmac=pkey+(*message);
+  pmac=md5Number(pmac);
 	return pmac;
 }
