@@ -9,12 +9,9 @@ char *Pointer = &data_raw[12];
 
 int main(){
 	uint8_t *result;
-  //Also we can't get use SHA-1
-  /*print_hash(md5Number(md5String(data_raw)));
-  print_hash(md5Number(md5String(data_raw)));*/
-
+  // We print the result of each key hash between 0 and 9
   result = md5String(data_raw);
-  for(int i=0; i<11;i++){
+  for(int i=0; i<10;i++){
 	 
     printf("index %i   :", i);
 	  print_hash(result);

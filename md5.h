@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+
 typedef struct{
 	uint64_t size;        // Size of input in bytes
 	uint32_t buffer[4];   // Current accumulation of hash

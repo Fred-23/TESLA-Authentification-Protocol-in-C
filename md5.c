@@ -8,6 +8,7 @@
 /*
  * Constants defined by the MD5 algorithm
  */
+
 #define A 0x67452301
 #define B 0xefcdab89
 #define C 0x98badcfe
