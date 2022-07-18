@@ -39,54 +39,47 @@ char msg1[12]= "TU WIEN";
 struct Packet_Tesla queue[12];
 
 int main(){
-	uint8_t *first_key;
+	uint8_t *key0;
   uint8_t *keyObject;
   uint8_t *MACmsg;
   uint8_t *resultpow = malloc(16);
   uint8_t *mac_result;
   //char *char_result;
   // We print the result of each key hash between 0 and 9
-  first_key = md5String(data_raw);
-  //I must change that to get the last key
-  resultpow=md5Pow(first_key,2);
+  keyObject = md5String(data_raw);
+  //ko last key
+  resultpow=md5Pow(keyObject,1); //Index
   //print_hash(resultpow);
 
-  keyObject=first_key;
+  
   //-------------------Sender Part----------------------//
   for(int i=0; i<number;i++){
     
-    if(i<delay){
-      Table_of_Keys[i]=keyObject;
-      queue[i].index=i;
-      queue[i].key=keyObject;
-      keyObject = md5Number(keyObject);
-    }
-    else{
-      MACmsg = mac(keyObject,msg1);
-      Table_of_Keys[i]=keyObject;
-      queue[i].index=i;
+    
+    Table_of_Keys[i]=keyObject;
+    queue[i].index=i;
+    if(i>=delay){ 
+      MACmsg = mac(Table_of_Keys[i],msg1);
       queue[i].mac=MACmsg;
-    }
+      printf("MAC msg :  ");
+      print_hash(queue[i].mac); 
+      }
+    queue[i].key=keyObject;
+    keyObject = md5Number(keyObject);
+    
     printf("index %i   :", i);
 	  print_hash(Table_of_Keys[i]);
-      
-  //print_hash(Table_of_Keys[i]);*
     
-      /*struct Packet_Tesla
-        {
-           int index;
-           char message[12];
-           uint8_t *mac;
-           uint8_t *key;
-        };*/  
-    //--------Use packets structure----//
-
     }
     //To free-up the memory
     //free(result);
-  
-  mac_result=mac(resultpow,msg1);
+
   //Will change in stm32F4
+  printf("test mac:  ");
+  mac_result=mac(resultpow,msg1);
   print_hash(mac_result);
- 
+  
+  key0=queue[number-1].key;
+  printf("test Key 0 :  ");
+  print_hash(key0);
 }
