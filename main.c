@@ -19,9 +19,11 @@ Not necessary since we have a node and a anchor
 
 Put a lot of comments for my tutor
 
-Test all the new functions and try to authentificate some message. Modify the sender to send message after some index (2)
+Test all the new functions and try to authentificate some message. Modify the sender to send message after some index (2) ok
 
-Mieux gérer les pacquets
+Only thing to do it's the receiver part that will take a table of structure and try to authentificate the message
+
+Also do a lot of print for the packet to now what it's been send everytime
 */
 struct Packet_Tesla
 {
