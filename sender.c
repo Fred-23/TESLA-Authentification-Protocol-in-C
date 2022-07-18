@@ -1,14 +1,6 @@
 #include "sender.h"
 #include "md5.h"
 //https://code-examples.net/fr/q/101092
-struct Packet_Tesla
-{
-   int index;
-   char message[12];
-   uint8_t *mac;
-   uint8_t *key;
-};
-
 
 //File for generating the key hash
 void print_bytes(void *p, size_t length){
