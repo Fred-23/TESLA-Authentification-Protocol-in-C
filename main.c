@@ -7,14 +7,13 @@
 //TO DO
 /*
 Check the table of keys (init plus incrementation)
-and md5Pow function
+and md5Pow function OK
 mac with the same message OK
 Do the receiver part as python but make something different for the index, maybe an interruption or an condition in parallel
 In a first time don't lose to much time on that because it will be use differently in the drone
 Put a lot of comments for my tutor
 Test all the new functions and try to authentificate some message. Modify the sender to send message after some index (2)
 */
-
 
 uint8_t* Table_of_Keys[10]={0};
 char data_raw[12]= "Hello World";
@@ -34,6 +33,7 @@ int main(){
 	  Table_of_Keys[i]=result;
     printf("index %i   :", i);
 	  print_hash(result);
+    print_hash(Table_of_Keys[i]);
     result = md5Number(result);
 
       /*struct Packet_Tesla
