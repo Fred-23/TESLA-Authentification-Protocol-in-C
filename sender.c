@@ -39,12 +39,16 @@ void print_char_hash(char *p){
 
 
 uint8_t* mac(uint8_t *pkey, char *message ){
-  uint8_t *pmac;
-  
+  uint8_t *pmess=malloc(16);
+  uint8_t *pfinal=malloc(16);
+  uint8_t operation;
+  uint8_t *poper=malloc(16);
 	//concatenate the key and message then do the hash
-  pmac=pkey+(*message);
-  pmac=md5Number(pmac);
-	return pmac;
+  memcpy(pmess, message, 16);
+  operation= *pmess+*pkey;
+  *poper= operation;
+  pfinal=md5Number(poper);
+	return pfinal;
 }
 
 uint8_t* md5Pow(uint8_t *keytohashpow, int iteration){

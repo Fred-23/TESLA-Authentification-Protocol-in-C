@@ -4,7 +4,6 @@
 #include "md5.h"
 #include "sender.h"
 
-
 //TO DO
 /*
 Check the table of keys (init plus incrementation)
@@ -15,8 +14,9 @@ In a first time don't lose to much time on that because it will be use different
 Put a lot of comments for my tutor
 Test all the new functions and try to authentificate some message. Modify the sender to send message after some index (2)
 */
-uint8_t* Table_of_Keys[10]={0};
 
+
+uint8_t* Table_of_Keys[10]={0};
 char data_raw[12]= "Hello World";
 char *Pointer = &data_raw[12];
 
@@ -44,16 +44,15 @@ int main(){
         };*/  
     //--------Use packets structure----//
 
-    
     //free(result);
     }
 
   mac_result=mac(result,data_raw);//Will change in stm32 so not a issue only not for the reicever
   print_hash(mac_result);
 
-
-
   
+  //mac_result=mac(result,);//Will change in stm32 so not a issue only not for the reicever
+  //print_hash(mac_result);
   //Need improvement
   /*char_result = md5Char(data_raw);
   for(int i=0; i<10;i++){
