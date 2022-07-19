@@ -29,12 +29,13 @@ int main(){
   uint8_t *resultpow = malloc(16);
   uint8_t *mac_result;
   uint8_t *zero = malloc (16);
-  //char *char_result;
-  // We print the result of each key hash between 0 and 9
+
+  
+  // We print the result of each packets
   keyObject = md5String(data_raw);
-  //k0 last key
+  
   resultpow=md5Pow(keyObject,1); //Index
-  //print_hash(resultpow);
+
 
   //-------------------Sender Part----------------------//
   for(int i=0; i<number;i++){
@@ -50,25 +51,22 @@ int main(){
     
     MACmsg = mac(Table_of_Keys[i],msg1);
     queue[i].mac=MACmsg;
-    //printf("MAC msg :  ");
-    //print_hash(queue[i].mac); 
     keyObject = md5Number(keyObject);
-    //printf("index %i  Key  :", i);
-	  //print_hash(Table_of_Keys[i]);
     print_packet(queue[i]);
     }
+  
     //To free-up the memory
     //free(result);
 
-  //Will change in stm32F4 (MAC TEST)
-  /*printf("test mac:  ");
+  //TO change in stm32F4 (MAC TEST)
+  printf("test mac:  ");
   mac_result=mac(resultpow,msg1);
-  print_hash(mac_result);*/
+  print_hash(mac_result);
 
-  //Hardcoded First Key
+  //Hardcoded Last Key (K0)
   key0=Table_of_Keys[number-1];
-
-  
   printf("test Key 0 :  ");
   print_hash(key0);
+
+  
 }

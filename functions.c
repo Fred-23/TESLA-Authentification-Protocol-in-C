@@ -7,4 +7,5 @@ void print_packet(struct Packet_Tesla ppacket){
 	printf(" |  Key = ");
   print_hash(ppacket.key);
   printf(" ]");
+  printf(" \n");
 }
