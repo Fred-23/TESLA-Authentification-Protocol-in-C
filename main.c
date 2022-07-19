@@ -100,7 +100,7 @@ int main(){
           print_hash(varpow);
           print_hash(mac_rst);
           printf("%i",p);
-          if (mac_rst == queue[p+delay].mac){
+          if (*mac_rst == *queue[p+delay].mac){
             compare_result=true;
             printf("receiver : authentification successful for %s   \n", queue[p+2].message);
           //}

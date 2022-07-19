@@ -8,12 +8,13 @@
 bool IsValidkey(uint8_t *pkey,uint8_t *key_zero, int number_of_keys){
 	uint8_t *someKey;
   someKey = md5Number(pkey);
+  //someKey = key_zero;
   bool result= false;
   for(int i=0;i<number_of_keys;i++){
     print_hash(someKey);
     //print_hash(key_zero);
     //First Verification
-    if (someKey == key_zero){
+    if (*someKey == *key_zero){
       result =true;
       printf("VALIDDD");
     }
