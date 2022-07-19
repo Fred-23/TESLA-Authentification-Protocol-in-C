@@ -4,16 +4,15 @@
 
 //Receiver part to analyze the data and valid it
 
-bool IsValidkey(uint8_t *pkey){
-	uint8_t *someKey;
-  someKey = md5Number(pkey);
-  for(int i=0;i<size_n;i++){
-    print_hash(someKey);
-
+bool IsValidkey(uint8_t *pkey,uint8_t *key_zero, int number_of_keys){
+	uint8_t *someKey=key_zero;
+  for(int i=0;i<number_of_keys;i++){
+    //print_hash(someKey);
     //First Verification
-    if (key_zero == someKey){
+    if (someKey == pkey){
       return true;
     }
+    someKey = md5Pow(pkey,i);
   }
   return false;
 }

@@ -49,7 +49,7 @@ uint8_t* md5Pow(uint8_t *keytohashpow, int iteration){
   for(signed int i = 0; i < iteration; ++i){
     powkey=md5Number(powkey);
 	}
-  print_hash(powkey);
+  //print_hash(powkey);
   return powkey;
 }
 
