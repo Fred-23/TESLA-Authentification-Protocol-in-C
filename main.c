@@ -70,7 +70,7 @@ int main(){
   print_hash(mac_result);
 
   //Hardcoded Last Key (K0)
-  key0=Table_of_Keys[0];
+  key0=Table_of_Keys[number-1];
   printf("test Key 0 :  ");
   print_hash(key0);
 
@@ -83,8 +83,8 @@ int main(){
     uint8_t *mac_rst ;
     bool compare_result=false;
     
-    if(global_time>delay){
-      receiver_buffer[p]=queue[p+delay].key;
+    //if(global_time>delay){
+      receiver_buffer[p]=queue[p].key;
       if(IsValidkey(receiver_buffer[p],key0,number)){
         printf("Valid \n");
         //Respect the timing conditions but we can do it here 
@@ -92,15 +92,18 @@ int main(){
         //Think about lost packet for the implementation
         compare_result = false;
         
-        for(int exp=0; exp<number-1;exp++){
+        //for(int exp=0; exp<number-1;exp++){
+        int exp=0;
+        exp = delay-queue[p].index+p;
           varpow=md5Pow(receiver_buffer[p],exp);
           mac_rst=mac(varpow, queue[p+delay].message);
           print_hash(varpow);
           print_hash(mac_rst);
+          printf("%i",p);
           if (mac_rst == queue[p+delay].mac){
             compare_result=true;
             printf("receiver : authentification successful for %s   \n", queue[p+2].message);
-          }
+          //}
           
           free(varpow);
           free(mac_rst);
@@ -118,4 +121,4 @@ int main(){
 
   
     } 
-}
+//}
