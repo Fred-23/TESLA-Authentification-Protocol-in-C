@@ -92,18 +92,19 @@ int main(){
         //Think about lost packet for the implementation
         compare_result = false;
         
-        //for(int exp=0; exp<number-1;exp++){
-        int exp=0;
-        exp = delay-queue[p].index+p;
+        for(int exp=0; exp<number-1;exp++){
+        //int exp=0;
+        //exp = delay-queue[p].index+p;
           varpow=md5Pow(receiver_buffer[p],exp);
           mac_rst=mac(varpow, queue[p+delay].message);
           print_hash(varpow);
           print_hash(mac_rst);
-          printf("%i",p);
-          if (*mac_rst == *queue[p+delay].mac){
+          print_hash(queue[p+delay].mac);
+          printf("%i \n",p);
+          if (*mac_rst == *queue[p].mac){
             compare_result=true;
             printf("receiver : authentification successful for %s   \n", queue[p+2].message);
-          //}
+          }
           
           free(varpow);
           free(mac_rst);
