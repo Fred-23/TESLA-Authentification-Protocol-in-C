@@ -83,7 +83,9 @@ int main(){
     uint8_t *mac_rst ;
     bool compare_result=false;
     
-    //if(global_time>delay){
+    //if(p>delay){
+    //Vérifier que le packet est none
+    
       receiver_buffer[p]=queue[p].key;
       if(IsValidkey(receiver_buffer[p],key0,number)){
         printf("Valid \n");
