@@ -23,6 +23,7 @@ char msg1[12]= "TU WIEN";
 
 struct Packet_Tesla queue[12];
 uint8_t* receiver_buffer[10]={0};
+uint8_t* _buff[10]={0};
 
 int main(){
 	uint8_t *key0;
@@ -83,45 +84,52 @@ int main(){
     uint8_t *mac_rst ;
     bool compare_result=false;
     
-    //if(p>delay){
+    
     //Vérifier que le packet est none
     
       receiver_buffer[p]=queue[p].key;
-      if(IsValidkey(receiver_buffer[p],key0,number)){
-        printf("Valid \n");
-        //Respect the timing conditions but we can do it here 
-        //not a true simulation
-        //Think about lost packet for the implementation
-        compare_result = false;
-        
-        for(int exp=0; exp<number-1;exp++){
-        //int exp=0;
-        //exp = delay-queue[p].index+p;
-          varpow=md5Pow(receiver_buffer[p],exp);
-          mac_rst=mac(varpow, queue[p+delay].message);
-          print_hash(varpow);
-          print_hash(mac_rst);
-          print_hash(queue[p+delay].mac);
-          printf("%i \n",p);
-          if (*mac_rst == *queue[p].mac){
-            compare_result=true;
-            printf("receiver : authentification successful for %s   \n", queue[p+2].message);
-          }
-          
-          free(varpow);
-          free(mac_rst);
-          
+      if(queue[p].key ==zero){
+        printf("receiver : got the packet");
         }
-        if (compare_result==false) {
-            printf("receiver : authentification failed for %s   \n", queue[p+2].message);
+      else{
+        if(global_time>delay){
+          if(IsValidkey(receiver_buffer[p],key0,number)){
+            printf("Valid \n");
+            _buff=receiver_buffer;
+            //On copie une certaine taille d'un tableau
+            //Puis on parcoure le buffer et on execute la vérification
+            //plus qu'à trouver une solution pour copier les buffer et le programmes devrait être quasi-fini
+            compare_result = false;
             
+            for(int exp=0; exp<number-1;exp++){
+            //int exp=0;
+            //exp = delay-queue[p].index+p;
+              varpow=md5Pow(receiver_buffer[p],exp);
+              mac_rst=mac(varpow, queue[p+delay].message);
+              print_hash(varpow);
+              print_hash(mac_rst);
+              print_hash(queue[p+delay].mac);
+              printf("%i \n",p);
+              if (*mac_rst == *queue[p].mac){
+                compare_result=true;
+                printf("receiver : authentification successful for %s   \n", queue[p+2].message);
+              }
+              
+              free(varpow);
+              free(mac_rst);
+              
+            }
+            if (compare_result==false) {
+                printf("receiver : authentification failed for %s   \n", queue[p+2].message);
+                
+              }
           }
-      }
-      else {
-        printf("receiver : not a valid key \n");
-      }
+          else {
+            printf("receiver : not a valid key \n");
+          }
+        }
+    
+      
+        } 
     }
-
-  
-    } 
-//}
+}
