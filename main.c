@@ -81,10 +81,11 @@ int main(){
   //This part will really change when implementate in the drone
   for(int p=0; p<number-1;p++){
     uint8_t *varpow =malloc(16);
-    uint8_t *mac_rst ;
+    uint8_t *mac_rst = malloc(16);
     bool compare_result=false;
     
-    
+    free(varpow);
+    free(mac_rst);
     //Vérifier que le packet est none
     
       receiver_buffer[p]=queue[p].key;
@@ -94,33 +95,36 @@ int main(){
       else{
         if(global_time>delay){
           if(IsValidkey(receiver_buffer[p],key0,number)){
-            printf("Valid \n");
-            _buff=receiver_buffer;
+            printf("Valid Key\n");
+            //_buff=receiver_buffer;
             //On copie une certaine taille d'un tableau
             //Puis on parcoure le buffer et on execute la vérification
             //plus qu'à trouver une solution pour copier les buffer et le programmes devrait être quasi-fini
+           // Ma solution faire un strlen puis à partir du nombre faire un boucle qui . Puis gérer l'exponentielle
             compare_result = false;
             
-            for(int exp=0; exp<number-1;exp++){
-            //int exp=0;
-            //exp = delay-queue[p].index+p;
-              varpow=md5Pow(receiver_buffer[p],exp);
-              mac_rst=mac(varpow, queue[p+delay].message);
-              print_hash(varpow);
-              print_hash(mac_rst);
-              print_hash(queue[p+delay].mac);
+            for(int it=0; it<number-1;it++){
+            int exp=0;
+            
+              
               printf("%i \n",p);
               if (*mac_rst == *queue[p].mac){
+                print_hash(varpow);
+                print_hash(mac_rst);
+                print_hash(queue[p].mac);
                 compare_result=true;
-                printf("receiver : authentification successful for %s   \n", queue[p+2].message);
+                printf("receiver : authentification successful for %s   \n", queue[p].message);
+                
               }
-              
-              free(varpow);
-              free(mac_rst);
+              else{
+                exp = delay-queue[it].index-p;
+                varpow=md5Pow(receiver_buffer[p],exp);
+                mac_rst=mac(varpow, queue[p].message);
+              }
               
             }
             if (compare_result==false) {
-                printf("receiver : authentification failed for %s   \n", queue[p+2].message);
+                printf("receiver : authentification failed for %s   \n", queue[p].message);
                 
               }
           }
